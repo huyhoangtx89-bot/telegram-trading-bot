@@ -1,7 +1,6 @@
 import asyncio
 import time
 import yfinance as yf
-from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 
 BOT_TOKEN = "PUT_TOKEN_VAO_ENV_RENDER"
@@ -72,7 +71,15 @@ async def scanner(app):
 
 # ====== MAIN ======
 def main():
+    def main():
     app = Application.builder().token(BOT_TOKEN).build()
+
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("add", add))
+    app.add_handler(CommandHandler("remove", remove))
+    app.add_handler(CommandHandler("list", list_symbols))
+
+    app.run_polling()
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("add", add))
